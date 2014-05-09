@@ -13,7 +13,8 @@ class weather_bot:
 	# Init will build API urls for us.
 	def __init__(self):
 
-		self.WEATHER_API_ENDPOINT = 'http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}'
+		# Defining the two API Endpoints.
+		self.WEATHER_API_ENDPOINT = 'http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=imperial'
 		self.LOCATION_API_ENDPOINT = 'http://freegeoip.net/json'
 		
 		# Now the weather-bot needs to localize our current position.
@@ -72,9 +73,17 @@ class weather_bot:
 			# Format weather endoint with our coords.
 			self.WEATHER_API_ENDPOINT = self.WEATHER_API_ENDPOINT.format(self.lat, self.lon)
 
+	# Show_weather will format the weather_data and print it to screen.
+	def show_weather(self):
+		print 'weather-bot> Currently -> {0} and {1} degrees.'.format(
+								self.weather_data['weather'][0]['description'],
+								self.weather_data['main']['temp'],
+								)
+
 # Main routine.
 if __name__ == '__main__':
 
 	# Create our weather-bot.
 	bot = weather_bot()
 	print bot.WEATHER_API_ENDPOINT
+	bot.show_weather()
