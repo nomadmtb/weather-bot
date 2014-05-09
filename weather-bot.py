@@ -1,10 +1,16 @@
+#! /usr/bin/python
+
+# Kyle Luce
+# May 9, 2014
+# weather-bot.py
+
 # Importing Required Libraries.
 import json
 import requests
 
 # Panic Error method.
 def app_panic(status):
-	print 'Application ERROR: {0}'.format(status)
+	print '\033[91mApplication ERROR: {0}\033[0m'.format(status)
 	exit(1)
 
 # Defining Weather-bot class.
@@ -75,7 +81,7 @@ class weather_bot:
 
 	# Show_weather will format the weather_data and print it to screen.
 	def show_weather(self):
-		print 'weather-bot> Current Weather: {0}, {1} degrees at {2}% humidity.'.format(
+		print '\033[94mweather-bot>\033[0m Current Conditions: {0}, {1} degrees at {2}% humidity.'.format(
 								self.weather_data['weather'][0]['description'],
 								self.weather_data['main']['temp'],
 								self.weather_data['main']['humidity'],
