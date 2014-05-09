@@ -75,9 +75,10 @@ class weather_bot:
 
 	# Show_weather will format the weather_data and print it to screen.
 	def show_weather(self):
-		print 'weather-bot> Currently -> {0} and {1} degrees.'.format(
+		print 'weather-bot> Current Weather: {0}, {1} degrees at {2}% humidity.'.format(
 								self.weather_data['weather'][0]['description'],
 								self.weather_data['main']['temp'],
+								self.weather_data['main']['humidity'],
 								)
 
 # Main routine.
@@ -85,5 +86,6 @@ if __name__ == '__main__':
 
 	# Create our weather-bot.
 	bot = weather_bot()
-	print bot.WEATHER_API_ENDPOINT
+
+	# Print the current weather conditions.
 	bot.show_weather()
