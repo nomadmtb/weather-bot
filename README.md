@@ -1,4 +1,4 @@
-# Weather-bot>
+# weather-bot>
 
 ![](https://raw.github.com/nomadmtb/weather-bot/master/img/screenshot.png)
 
