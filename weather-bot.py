@@ -2,6 +2,11 @@
 import json
 import requests
 
+# Panic Error method.
+def app_panic(status):
+	print 'Application ERROR: {0}'.format(status)
+	exit(1)
+
 # Defining Weather-bot class.
 class weather_bot:
 
@@ -14,6 +19,32 @@ class weather_bot:
 		# Now the weather-bot needs to localize our current position.
 		self.__localize__()
 
+		# Now the weather-bot can get our weather data.
+		self.__get_weather__()
+
+	# Get_weather will lookup the current weather.
+	def __get_weather__(self):
+
+		# Get weather response.
+		try:
+			response = requests.get(self.WEATHER_API_ENDPOINT)
+
+		except requests.ConnectionError:
+
+			app_panic('Connection Error (weather).')
+
+		# If there is an HTTP status error code.
+		if response.status_code is not 200:
+
+			app_panic('Connection Error (weather).')
+
+		# Cool everything looks cool, move along.
+		else:
+			data = json.loads(response.text)
+			
+			# Storing the whole weather hash into our class.
+			self.weather_data = data
+
 	# Localize will lookup the bot's location.
 	def __localize__(self):
 		
@@ -23,16 +54,16 @@ class weather_bot:
 
 		except requests.ConnectionError:
 
-			self.status = 'ERROR, connection error.'
+			app_panic('Connection Error (localize).')
+
 
 		# If there is an HTTP status error code.
 		if response.status_code is not 200:
 
-			self.status = 'ERROR, LOCALIZATION FAILED'
+			app_panic('Bad HTTP Response (localize).')
 
 		# Cool everything looks cool, move along.
 		else:
-			self.status = 'Ok'
 			data = json.loads(response.text)
 
 			self.lat = data['latitude']
@@ -46,5 +77,4 @@ if __name__ == '__main__':
 
 	# Create our weather-bot.
 	bot = weather_bot()
-	print bot.status
 	print bot.WEATHER_API_ENDPOINT
