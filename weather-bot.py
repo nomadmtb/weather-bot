@@ -81,7 +81,7 @@ class weather_bot:
 
 	# Show_weather will format the weather_data and print it to screen.
 	def show_weather(self):
-		print '\033[94mweather-bot>\033[0m Current Conditions: {0}, {1} degrees at {2}% humidity.'.format(
+		print '\033[94mweather-bot>\033[0m {0}, {1} degrees at {2}% humidity.'.format(
 								self.weather_data['weather'][0]['description'],
 								self.weather_data['main']['temp'],
 								self.weather_data['main']['humidity'],
