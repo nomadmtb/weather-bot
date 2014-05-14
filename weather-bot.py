@@ -38,19 +38,18 @@ class weather_bot:
 
 		except requests.ConnectionError:
 
-			app_panic('Connection Error (weather).')
+			app_panic('Connection Error (Can\'t lookup weather).')
 
 		# If there is an HTTP status error code.
 		if response.status_code is not 200:
 
-			app_panic('Connection Error (weather).')
+			app_panic('Connection Error (Can\'t lookup weather).')
 
 		# Cool everything looks cool, move along.
 		else:
-			data = json.loads(response.text)
-			
+
 			# Storing the whole weather hash into our class.
-			self.weather_data = data
+			self.weather_data = json.loads(response.text)
 
 	# Localize will lookup the bot's location.
 	def __localize__(self):
@@ -61,13 +60,13 @@ class weather_bot:
 
 		except requests.ConnectionError:
 
-			app_panic('Connection Error (localize).')
+			app_panic('Connection Error (Can\'t lookup Location).')
 
 
 		# If there is an HTTP status error code.
 		if response.status_code is not 200:
 
-			app_panic('Bad HTTP Response (localize).')
+			app_panic('Bad HTTP Response (Can\'t lookup Location).')
 
 		# Cool everything looks cool, move along.
 		else:
