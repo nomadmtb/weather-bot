@@ -7,6 +7,7 @@
 # Importing Required Libraries.
 import json
 import requests
+import sys
 
 # Panic Error method.
 def app_panic(status):
@@ -91,6 +92,12 @@ if __name__ == '__main__':
 
 	# Create our weather-bot.
 	bot = weather_bot()
+
+	# Check to see if debug option is set.
+	if '--debug' in sys.argv:
+
+		print 'Debug ON'
+		print 'Lat -> {0}, Lon -> {1}'.format(bot.lat, bot.lon)
 
 	# Print the current weather conditions.
 	bot.show_weather()
